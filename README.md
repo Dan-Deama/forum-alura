@@ -1,52 +1,78 @@
-# FORUM HUB API
+# 📚 Forum Alura
 
-API REST desenvolvida em Spring Boot para gerenciamento de tópicos de fórum, com autenticação JWT e operações CRUD completas.
+Este é um projeto de API REST desenvolvido com **Spring Boot**, voltado para a criação de um fórum de discussão. Ele inclui autenticação JWT, migração de banco de dados com Flyway e organização modular por domínio.
 
-## Tecnologias
+## 🚀 Tecnologias Utilizadas
 
-- Java 17  
-- Spring Boot 3.x  
-- Spring Security  
-- Spring Data JPA (Hibernate)  
-- Banco de dados SQL (H2/PostgreSQL)  
-- JWT (JSON Web Token)  
-- Maven ou Gradle  
+- Java 17
+- Spring Boot
+- Spring Security
+- JWT (JSON Web Token)
+- Flyway
+- MySQL
+- Maven
 
-## Pré-requisitos
+## 📁 Estrutura do Projeto
 
-- JDK 17 instalado  
-- Maven (ou Gradle) configurado no PATH  
-- Banco de dados configurado em `application.properties`  
+<pre><code>
+   forum-alura/
+   ├── src/
+   │   ├── main/
+   │   │   ├── java/
+   │   │   │   └── br/com/alura/forum/
+   │   │   │       ├── config/
+   │   │   │       │   └── ModelMapperConfig.java
+   │   │   │       ├── controller/
+   │   │   │       │   └── AutenticacaoController.java
+   │   │   │       ├── domain/
+   │   │   │       │   ├── perfil/
+   │   │   │       │   ├── resposta/
+   │   │   │       │   ├── topico/
+   │   │   │       │   └── usuario/
+   │   │   │       ├── infra/security/
+   │   │   │       │   ├── DadosTokenJWT.java
+   │   │   │       │   ├── SecurityConfigurations.java
+   │   │   │       │   ├── SecurityFilter.java
+   │   │   │       │   └── TokenService.java
+   │   │   │       └── ForumAluraApplication.java
+   │   │   └── resources/
+   │   │       ├── db/migration/
+   │   │       │   └── v1__create-tables.sql
+   │   │       └── application.properties
+   │   └── test/</code></pre>
 
-## Configuração
 
-1. Clone o repositório:  
-   ```bash
-   [git clone https://github.com/seu-usuario/topicos-api.git](https://github.com/Dan-Deama/forum-alura.git)
-```
-```
-2. Edite os campos do Application.properties
-````
-spring.datasource.url=jdbc:postgresql://localhost:5432/topicosdb
+## ⚙️ Configurações (`application.properties`)
+
+```properties
+spring.application.name=forum-alura
+spring.flyway.enabled=true
+spring.flyway.locations=classpath:db/migration
+
+spring.datasource.url=jdbc:mysql://localhost:3306/forumhub
 spring.datasource.username=seu_usuario
 spring.datasource.password=sua_senha
 
-jwt.secret=umaChaveSecretaLonga
-jwt.expiration=3600000
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+server.error.include-stacktrace=never
+
+api.security.token.secret=umaChaveSecretaLonga
 ````
 
-## Tecnologias
-Java 17+
-Spring Boot
-Spring Data JPA / Hibernate
-PostgreSQL
-Maven
-Lombok
-JWT
+## 🧪 Como Executar
+- Clone o repositório:
+git clone https://github.com/Dan-Deama/forum-alura.git
+cd forum-alura
+- Configure o banco de dados MySQL com o nome forumhub.
+- Atualize o application.properties com suas credenciais.
+- Execute o projeto:
+./mvnw spring-boot:run
 
-## Funcionalidades
-Cadastrar usuarios
-Fazer login
-criar tópicos
+
+## 🔐 Autenticação
+O projeto utiliza autenticação baseada em JWT. Após o login via AutenticacaoController, o token é gerado e deve ser incluído no header Authorization para acessar endpoints protegidos.
+
 
 
